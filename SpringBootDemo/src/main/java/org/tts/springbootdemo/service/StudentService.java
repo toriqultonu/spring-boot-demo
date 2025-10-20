@@ -19,4 +19,8 @@ public interface StudentService {
     StudentDto updateStudent(Long id, AddStudentRequestDto addStudentRequestDto);
 
     StudentDto updatePartialStudent(Long id, Map<String, Object> updates);
+
+    StudentDto getStudentByName(String name);
+
+    String getRandom(String name);
 }

@@ -79,4 +79,15 @@ public class StudentServiceImpl implements StudentService{
         studentRepository.save(student);
         return modelMapper.map(student, StudentDto.class);
     }
+
+    @Override
+    public StudentDto getStudentByName(String name) {
+        Student student = studentRepository.findByName(name);
+        return modelMapper.map(student, StudentDto.class);
+    }
+
+    @Override
+    public String getRandom(String name) {
+        return studentRepository.randomEmail(name);
+    }
 }

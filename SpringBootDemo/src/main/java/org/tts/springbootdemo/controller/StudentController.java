@@ -32,6 +32,16 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentById(id));
     }
 
+    @GetMapping("/{name}")
+    public ResponseEntity<StudentDto> getStudentByName(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getStudentByName(name));
+    }
+
+    @GetMapping("/rand/{name}")
+    public ResponseEntity<String> getRandom(@PathVariable String name){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.getRandom(name));
+    }
+
     @PostMapping("")
     public ResponseEntity<StudentDto> createNewStudent(@RequestBody @Valid AddStudentRequestDto addStudentRequestDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createNewStudent(addStudentRequestDto));
