@@ -12,8 +12,12 @@ public class StudentTest {
     @Autowired
     private StudentRepository studentRepository;
 
+    @Autowired
+    private StudentService studentService;
+
     @Test
     public void test() {
-        System.out.println(studentRepository.findAll());
+        System.out.println(studentService.getStudentById(1L));
+
     }
 }

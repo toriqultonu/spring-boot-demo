@@ -1,5 +1,6 @@
 package org.tts.springbootdemo.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -19,15 +20,19 @@ public class StudentServiceImpl implements StudentService{
 
     private final ModelMapper modelMapper;
 
+    @Transactional
     @Override
     public List<StudentDto> getAllStudents() {
         List<Student> students = studentRepository.findAll();
+        List<Student> studen = studentRepository.findAll();
         return students.stream().map(student -> modelMapper.map(student, StudentDto.class)).toList();
     }
 
+//    @Transactional
     @Override
     public StudentDto getStudentById(Long id) {
         Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student not found with" + id));
+        Student student2 = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student not found with" + id));
         return modelMapper.map(student, StudentDto.class);
     }
 
