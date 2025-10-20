@@ -9,6 +9,7 @@ import org.tts.springbootdemo.entity.Student;
 import org.tts.springbootdemo.repository.StudentRepository;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -45,5 +46,32 @@ public class StudentServiceImpl implements StudentService{
         else {
             studentRepository.deleteById(id);
         }
+    }
+
+    @Override
+    public StudentDto updateStudent(Long id, AddStudentRequestDto addStudentRequestDto) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + id));
+        modelMapper.map(addStudentRequestDto, student);
+        studentRepository.save(student);
+        return modelMapper.map(student, StudentDto.class);
+    }
+
+    @Override
+    public StudentDto updatePartialStudent(Long id, Map<String, Object> updates) {
+        Student student = studentRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + id));
+        updates.forEach((key, value) -> {
+            switch (key){
+                case "name":
+                    student.setName((String) value);
+                    break;
+                case "email":
+                    student.setEmail((String) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid key: " + key);
+            }
+        });
+        studentRepository.save(student);
+        return modelMapper.map(student, StudentDto.class);
     }
 }

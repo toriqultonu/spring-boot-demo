@@ -11,6 +11,7 @@ import org.tts.springbootdemo.repository.StudentRepository;
 import org.tts.springbootdemo.service.StudentServiceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,5 +42,14 @@ public class StudentController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<StudentDto> updateStudent(@PathVariable Long id, @RequestBody AddStudentRequestDto addStudentRequestDto){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.updateStudent(id, addStudentRequestDto));
+    }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<StudentDto> updatePartialStudent(@PathVariable Long id,
+                                                           @RequestBody Map<String, Object> updates){
+        return ResponseEntity.status(HttpStatus.OK).body(studentService.updatePartialStudent(id, updates));
+    }
 }
