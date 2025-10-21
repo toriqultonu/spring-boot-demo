@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,5 +41,8 @@ public class Student {
 
     @OneToOne
     private Insurance insurance;
+
+    @OneToMany(mappedBy = "student") // this is just for bi-directional connections. just to get appointment from student in jpa.
+    private List<Appointment> appointments;
 
 }
