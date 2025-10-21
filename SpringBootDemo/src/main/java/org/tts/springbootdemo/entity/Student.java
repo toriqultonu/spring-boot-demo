@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,10 +40,12 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "student") // this is just for bi-directional connections. just to get appointment from student in jpa.
-    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true) // this is just for bi-directional connections. just to get appointment from student in jpa.
+    @ToString.Exclude
+    private List<Appointment> appointments = new ArrayList<>();
 
 }
