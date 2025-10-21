@@ -3,8 +3,11 @@ package org.tts.springbootdemo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.tts.springbootdemo.entity.Student;
 import org.tts.springbootdemo.repository.StudentRepository;
 import org.tts.springbootdemo.service.StudentService;
+
+import java.util.List;
 
 @SpringBootTest
 public class StudentTest {
@@ -30,5 +33,11 @@ public class StudentTest {
     @Test
     public void test3() {
         System.out.println(studentRepository.randomEmail("tonu"));
+    }
+
+    @Test
+    public void testStudentRepository() {
+        List<Student> students = studentRepository.findAllStudentWithAppointment();
+        System.out.println(students);
     }
 }

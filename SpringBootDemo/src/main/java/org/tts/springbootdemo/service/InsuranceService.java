@@ -24,4 +24,12 @@ public class InsuranceService {
         insurance.setStudent(student); // not needed just for bidirectional maintainence.
         return student;
     }
+
+    @Transactional
+    public Student disAccociateInsuranceFromStudent(Long studentId) {
+        Student student = studentRepository.findById(studentId).
+                orElseThrow(() -> new IllegalArgumentException("Student not found with id: " + studentId));
+        student.setInsurance(null);
+        return student;
+    }
 }

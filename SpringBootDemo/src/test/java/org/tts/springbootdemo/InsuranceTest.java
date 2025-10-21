@@ -31,6 +31,8 @@ public class InsuranceTest {
 
         Student student = insuranceService.assignInsuranceToStudent(insurance, 7L);
 
+        Student student1 = insuranceService.disAccociateInsuranceFromStudent(student.getId());
+
     }
 
     @Test
@@ -41,5 +43,8 @@ public class InsuranceTest {
                 .build();
 
        Appointment newAppointment =  appointmentService.createNewAppointment(appointment, 1L, 7L);
+
+       Appointment reAssignedAppointment = appointmentService.reAssignAppointmentToAnotherDoctor(newAppointment.getId(), 2L);
+
     }
 }

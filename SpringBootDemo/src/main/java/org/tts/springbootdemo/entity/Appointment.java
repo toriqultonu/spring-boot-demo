@@ -25,10 +25,12 @@ public class Appointment {
     private String reason;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "doctor_id", nullable = false)
     private Doctor doctor;
 }

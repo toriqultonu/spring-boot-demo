@@ -40,12 +40,12 @@ public class Student {
     @Enumerated(EnumType.STRING)
     private BloodGroup bloodGroup;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true) // this is just for bi-directional connections. just to get appointment from student in jpa.
-    @ToString.Exclude
+    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.EAGER) // this is just for bi-directional connections. just to get appointment from student in jpa.
+//    @ToString.Exclude
     private List<Appointment> appointments = new ArrayList<>();
 
 }

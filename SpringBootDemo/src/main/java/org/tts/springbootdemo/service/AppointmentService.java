@@ -38,4 +38,17 @@ public class AppointmentService {
         appointmentRepository.save(appointment);
         return appointment;
     }
+
+    @Transactional
+    public Appointment reAssignAppointmentToAnotherDoctor(Long appointmentId, Long doctorId){
+        Appointment appointment = appointmentRepository.findById(appointmentId).orElseThrow(() ->
+                new IllegalArgumentException("Appointment not found with id: " + appointmentId));
+
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(() -> new IllegalArgumentException("Doctor not found with id: " + doctorId));
+
+
+        appointment.setDoctor(doctor);
+
+        return appointment;
+    }
 }
