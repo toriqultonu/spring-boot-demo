@@ -42,11 +42,11 @@ public class WebSecurityConfig {
         return httpSecurity.build();
     }
 
-    @Bean
-    UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withUsername("admin").password(passwordEncoder.encode("pass")).roles("ADMIN").build();
-        UserDetails userDetails2 = User.withUsername("patient").password(passwordEncoder.encode("pass")).roles("PATIENT").build();
-
-        return new InMemoryUserDetailsManager(userDetails, userDetails2);
-    }
+//    @Bean
+//    UserDetailsService userDetailsService() {
+//        UserDetails userDetails = User.withUsername("admin").password(passwordEncoder.encode("pass")).roles("ADMIN").build();
+//        UserDetails userDetails2 = User.withUsername("patient").password(passwordEncoder.encode("pass")).roles("PATIENT").build();
+//
+//        return new InMemoryUserDetailsManager(userDetails, userDetails2);
+//    }
 }
